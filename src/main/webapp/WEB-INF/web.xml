@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+	id="WebApp_ID" version="4.0">
+	<display-name>OnlineBookStore</display-name>
+	<context-param>
+		<param-name>MYSQL_dbname</param-name>
+		<param-value>mydb</param-value>
+	</context-param>
+	<context-param>
+		<param-name>MYSQL_dburl</param-name>
+		<param-value>jdbc:mysql://localhost:3306</param-value>
+	</context-param>
+	<context-param>
+		<param-name>MYSQL_username</param-name>
+		<param-value>root</param-value>
+	</context-param>
+	<context-param>
+		<param-name>MYSQL_password</param-name>
+		<param-value>Uan26$?!</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>POSTGRES_dbname</param-name>
+		<param-value>mydb</param-value>
+	</context-param>
+	<context-param>
+		<param-name>POSTGRES_dburl</param-name>
+		<param-value>jdbc:mysql://localhost:3306</param-value>
+	</context-param>
+	<context-param>
+		<param-name>POSTGRES_username</param-name>
+		<param-value>root</param-value>
+	</context-param>
+	<context-param>
+		<param-name>POSTGRES_password</param-name>
+		<param-value>Uan26$?!</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>DB-IN-USE</param-name>
+		<param-value>MYSQL</param-value>
+	</context-param>
+
+	<servlet>
+		<servlet-name>StartUpServlet</servlet-name>
+		<servlet-class>com.narola.bookstore.utility.StartOnServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<!-- CATEGORY SERVLET/FILTER START -->
+
+	<servlet>
+		<servlet-name>CategoryAddServlet</servlet-name>
+		<servlet-class>com.narola.bookstore.category.controller.CategoryAddActionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CategoryAddServlet</servlet-name>
+		<url-pattern>/AddCategory</url-pattern>
+	</servlet-mapping>
+
+	<filter>
+		<filter-name>CategoryServletFilter</filter-name>
+		<filter-class>com.narola.bookstore.category.validation.CategoryValidationFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>CategoryServletFilter</filter-name>
+		<url-pattern>/AddCategory</url-pattern>
+	</filter-mapping>
+
+	<servlet>
+		<servlet-name>DisplayCategories</servlet-name>
+		<servlet-class>com.narola.bookstore.category.controller.DisplayCategoriesServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DisplayCategories</servlet-name>
+		<url-pattern>/DisplayCategories</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>DeleteCategory</servlet-name>
+		<servlet-class>com.narola.bookstore.category.controller.CategoryDeleteActionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteCategory</servlet-name>
+		<url-pattern>/DeleteCategory</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>UpdateFormCategory</servlet-name>
+		<servlet-class>com.narola.bookstore.category.controller.CategoryUpdateFormServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpdateFormCategory</servlet-name>
+		<url-pattern>/UpdateCategoryForm</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>UpdateCategorry</servlet-name>
+		<servlet-class>com.narola.bookstore.category.controller.CategoryUpdateActionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpdateCategorry</servlet-name>
+		<url-pattern>/UpdateCategory</url-pattern>
+	</servlet-mapping>
+
+	<filter-mapping>
+		<filter-name>CategoryServletFilter</filter-name>
+		<url-pattern>/UpdateCategory</url-pattern>
+	</filter-mapping>
+
+	<servlet>
+		<servlet-name>SearchCategory</servlet-name>
+		<servlet-class>com.narola.bookstore.category.controller.CategorySearchServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SearchCategory</servlet-name>
+		<url-pattern>/SearchCategory</url-pattern>
+	</servlet-mapping>
+
+	<!-- CATEGORY SERVLET/FILTER END -->
+
+	<!-- MASTER BOOK FORMAT SERVLET/FILTER START -->
+	<servlet>
+		<servlet-name>MasterBookAddServlet</servlet-name>
+		<servlet-class>com.narola.bookstore.msbookformat.controller.MasterBookFormatAddActionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MasterBookAddServlet</servlet-name>
+		<url-pattern>/AddMSBook</url-pattern>
+	</servlet-mapping>
+
+	<filter>
+		<filter-name>MSBookFormatAddServletFilter</filter-name>
+		<filter-class>com.narola.bookstore.msbookformat.validation.MSBookFormatValidationFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>MSBookFormatAddServletFilter</filter-name>
+		<url-pattern>/AddMSBook</url-pattern>
+	</filter-mapping>
+
+	<servlet>
+		<servlet-name>DisplayMSBooks</servlet-name>
+		<servlet-class>com.narola.bookstore.msbookformat.controller.DisplayMasterBooksServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DisplayMSBooks</servlet-name>
+		<url-pattern>/DisplayMSBooks</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>DeleteMSBook</servlet-name>
+		<servlet-class>com.narola.bookstore.msbookformat.controller.MasterBookFormatDeleteActionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteMSBook</servlet-name>
+		<url-pattern>/DeleteMSBook</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>UpdateMSBookForm</servlet-name>
+		<servlet-class>com.narola.bookstore.msbookformat.controller.MasterBookFormatUpdateFormServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpdateMSBookForm</servlet-name>
+		<url-pattern>/UpdateMSBookForm</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>UpdateMSBook</servlet-name>
+		<servlet-class>com.narola.bookstore.msbookformat.controller.MasterBookFormatUpdateActionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpdateMSBook</servlet-name>
+		<url-pattern>/UpdateMSBook</url-pattern>
+	</servlet-mapping>
+
+	<filter>
+		<filter-name>MSBookFormatUpdateServletFilter</filter-name>
+		<filter-class>com.narola.bookstore.msbookformat.validation.MSBookFormatValidationFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>MSBookFormatUpdateServletFilter</filter-name>
+		<url-pattern>/UpdateMSBook</url-pattern>
+	</filter-mapping>
+
+	<servlet>
+		<servlet-name>SearchMSBook</servlet-name>
+		<servlet-class>com.narola.bookstore.msbookformat.controller.MasterBookFormatSearchServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SearchMSBook</servlet-name>
+		<url-pattern>/SearchMSBook</url-pattern>
+	</servlet-mapping>
+
+	<!-- MASTER BOOK FORMAT END -->
+
+	<!-- BOOK SERVLET/FILTER START -->
+
+	<servlet>
+		<servlet-name>HomePage</servlet-name>
+		<servlet-class>com.narola.bookstore.user.DisplayHomePageServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>HomePage</servlet-name>
+		<url-pattern>/HomePageOfUser</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>BookAddServlet</servlet-name>
+		<servlet-class>com.narola.bookstore.book.controller.BookAddActionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>BookAddServlet</servlet-name>
+		<url-pattern>/AddBook</url-pattern>
+	</servlet-mapping>
+
+	<filter>
+		<filter-name>BookServletFilter</filter-name>
+		<filter-class>com.narola.bookstore.book.validation.BookValidationFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>BookServletFilter</filter-name>
+		<url-pattern>/AddBook</url-pattern>
+	</filter-mapping>
+
+	<servlet>
+		<servlet-name>DisplayListOfCategory</servlet-name>
+		<servlet-class>com.narola.bookstore.book.controller.AddBookFormServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DisplayListOfCategory</servlet-name>
+		<url-pattern>/addbookform</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>DisplayBooksServlet</servlet-name>
+		<servlet-class>com.narola.bookstore.book.controller.DisplayBooksServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DisplayBooksServlet</servlet-name>
+		<url-pattern>/DisplayBooks</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>DeleteBook</servlet-name>
+		<servlet-class>com.narola.bookstore.book.controller.BookDeleteActionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteBook</servlet-name>
+		<url-pattern>/DeleteBooks</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>DeleteImage</servlet-name>
+		<servlet-class>com.narola.bookstore.book.controller.ImageDeleteServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteImage</servlet-name>
+		<url-pattern>/DeleteImage</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>UpdateBookForm</servlet-name>
+		<servlet-class>com.narola.bookstore.book.controller.BookUpdateFormServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpdateBookForm</servlet-name>
+		<url-pattern>/UpdateBookForm</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>UpdateBook</servlet-name>
+		<servlet-class>com.narola.bookstore.book.controller.BookUpdateActionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpdateBook</servlet-name>
+		<url-pattern>/UpdateBook</url-pattern>
+	</servlet-mapping>
+
+	<filter-mapping>
+		<filter-name>BookServletFilter</filter-name>
+		<url-pattern>/UpdateBook</url-pattern>
+	</filter-mapping>
+
+	<servlet>
+		<servlet-name>SearchBook</servlet-name>
+		<servlet-class>com.narola.bookstore.book.controller.BookSearchServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SearchBook</servlet-name>
+		<url-pattern>/SearchBook</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ViewFormBook</servlet-name>
+		<servlet-class>com.narola.bookstore.book.controller.BookViewFormServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ViewFormBook</servlet-name>
+		<url-pattern>/ViewBookForm</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ViewBook</servlet-name>
+		<servlet-class>com.narola.bookstore.book.controller.BookViewInfoServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ViewBook</servlet-name>
+		<url-pattern>/ViewBook</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>SearchCategoryHome</servlet-name>
+		<servlet-class>com.narola.bookstore.book.controller.CategorySearchServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SearchCategoryHome</servlet-name>
+		<url-pattern>/SearchCategoryHome</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>BookDetails</servlet-name>
+		<servlet-class>com.narola.bookstore.book.controller.BookAllDetailsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>BookDetails</servlet-name>
+		<url-pattern>/BookDetails</url-pattern>
+	</servlet-mapping>
+
+	<!-- BOOK END -->
+
+	<!-- USER SERVLET/FILTER START -->
+	<servlet>
+		<servlet-name>UserSignUpServlet</servlet-name>
+		<servlet-class>com.narola.bookstore.user.UserSignUpServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserSignUpServlet</servlet-name>
+		<url-pattern>/UserSignUpServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>UserCheckOtpServlet</servlet-name>
+		<servlet-class>com.narola.bookstore.user.UserCheckOtpServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserCheckOtpServlet</servlet-name>
+		<url-pattern>/CheckOtpServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>UserUpdateFrom</servlet-name>
+		<servlet-class>com.narola.bookstore.user.UserUpdateFromServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserUpdateFrom</servlet-name>
+		<url-pattern>/UserUpdateFormServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>UserUpdateAction</servlet-name>
+		<servlet-class>com.narola.bookstore.user.UserUpdateActionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserUpdateAction</servlet-name>
+		<url-pattern>/UserUpdateAction</url-pattern>
+	</servlet-mapping>
+
+	<filter>
+		<filter-name>UserUpdateActionFilter</filter-name>
+		<filter-class>com.narola.bookstore.user.UserValidationFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>UserUpdateActionFilter</filter-name>
+		<url-pattern>/UserUpdateAction</url-pattern>
+	</filter-mapping>
+
+	<servlet>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>com.narola.bookstore.user.UserLoginServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/LoginServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>UserPlaceOrderServlet</servlet-name>
+		<servlet-class>com.narola.bookstore.user.UserPlaceOrderFromServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserPlaceOrderServlet</servlet-name>
+		<url-pattern>/UserPlaceOrder</url-pattern>
+	</servlet-mapping>
+
+	<!-- USER END -->
+	<!-- CART START -->
+	<servlet>
+		<servlet-name>AddtoCart</servlet-name>
+		<servlet-class>com.narola.bookstore.cart.AddtoCartBooks</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddtoCart</servlet-name>
+		<url-pattern>/AddtoCart</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>DisplaySelectedBook</servlet-name>
+		<servlet-class>com.narola.bookstore.cart.DisplayTotalSelectBook</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DisplaySelectedBook</servlet-name>
+		<url-pattern>/DisplaySelectedBook</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>DeleteSelectedBook</servlet-name>
+		<servlet-class>com.narola.bookstore.cart.CartDeleteActionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteSelectedBook</servlet-name>
+		<url-pattern>/DeleteSelectedBook</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>UpdateSelectedBookQuantity</servlet-name>
+		<servlet-class>com.narola.bookstore.cart.CartQuantityUpdateActionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpdateSelectedBookQuantity</servlet-name>
+		<url-pattern>/UpdateQuantity</url-pattern>
+	</servlet-mapping>
+
+	<!-- CART END -->
+
+	<!-- ORDER START -->
+
+	<servlet>
+		<servlet-name>OrderAddActionServlet</servlet-name>
+		<servlet-class>com.narola.bookstore.order.OrderAddActionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>OrderAddActionServlet</servlet-name>
+		<url-pattern>/OrderAdd</url-pattern>
+	</servlet-mapping>
+
+	<!-- ORDER END -->
+
+
+
+
+	<context-param>
+		<param-name>host</param-name>
+		<param-value>your_stmp_server</param-value>
+	</context-param>
+</web-app>
