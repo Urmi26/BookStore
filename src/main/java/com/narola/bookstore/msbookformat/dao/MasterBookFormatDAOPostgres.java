@@ -124,13 +124,12 @@ public class MasterBookFormatDAOPostgres implements IMasterBookFormatDAO {
 		return masterBookFormat;
 	}
 
-	public List<MasterBookFormat> searchMasterBookName(String msBookName)
-			throws DatabaseException {
+	public List<MasterBookFormat> searchMasterBookName(String msBookName) throws DatabaseException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<MasterBookFormat> searchMasterBookName = new ArrayList<>();
-	
+
 		try {
 			con = DBConnect.getInstance().getConnection();
 			ps = con.prepareStatement("SELECT * FROM master_book WHERE msBookName =?");

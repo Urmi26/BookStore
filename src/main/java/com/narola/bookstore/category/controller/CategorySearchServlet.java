@@ -2,6 +2,7 @@ package com.narola.bookstore.category.controller;
 
 import java.io.IOException;
 import com.narola.bookstore.category.service.ICategoryService;
+import com.narola.bookstore.exception.ApplicationException;
 import com.narola.bookstore.utility.ServiceFactory;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -17,12 +18,17 @@ public class CategorySearchServlet extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 			ICategoryService iCategoryService = ServiceFactory.getInstence().getCategoryService();
-			request.setAttribute("listOfCategory", iCategoryService.searchCategorys(request.getParameter("categoryName")));
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Category-view.jsp");
-			requestDispatcher.forward(request, response);
+			String categoryName = request.getParameter("categoryName");
+			if (categoryName == null || categoryName.isEmpty()) {
+				throw new ApplicationException("Category Name cann't be empty");
+			} else {
+				request.setAttribute("listOfCategory", iCategoryService.searchCategorys(categoryName));
+				RequestDispatcher requestDispatcher = request.getRequestDispatcher("Category-view.jsp");
+				requestDispatcher.forward(request, response);
+			}
 		} catch (Exception e) {
 			request.setAttribute("ErrorMessage", e.getMessage());
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Category-Search.jsp");
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Category-search.jsp");
 			requestDispatcher.forward(request, response);
 		}
 	}

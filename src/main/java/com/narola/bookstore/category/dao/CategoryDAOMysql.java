@@ -114,7 +114,8 @@ public class CategoryDAOMysql implements ICategoryDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when get Update Category Data Fetch By Id details" + e.getMessage());
+			throw new DatabaseException(
+					"Exceptions when get Update Category Data Fetch By Id details" + e.getMessage());
 		} finally {
 			DBConnect.closeResource(ps);
 		}

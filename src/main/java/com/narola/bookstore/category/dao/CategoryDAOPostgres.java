@@ -114,7 +114,8 @@ public class CategoryDAOPostgres implements ICategoryDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when get Update Category Data Fetch By Id details" + e.getMessage());
+			throw new DatabaseException(
+					"Exceptions when get Update Category Data Fetch By Id details" + e.getMessage());
 		} finally {
 			DBConnect.closeResource(ps);
 		}
@@ -134,10 +135,10 @@ public class CategoryDAOPostgres implements ICategoryDAO {
 
 			while (rs.next()) {
 				int categoryId = rs.getInt(1);
-				String CategoryName = rs.getString(2);
+				String CategorryName = rs.getString(2);
 				Date createdon = rs.getDate(3);
 				Date updatedon = rs.getDate(4);
-				searchCategoryName.add(new Categorry(categoryId, CategoryName, createdon, updatedon));
+				searchCategoryName.add(new Categorry(categoryId, CategorryName, createdon, updatedon));
 			}
 		} catch (DatabaseException e) {
 			throw e;

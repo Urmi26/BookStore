@@ -507,5 +507,4 @@ public class BookDAOMysql implements IBookDAO {
 		}
 		return book;
 	}
-
 }

@@ -2,6 +2,8 @@ package com.narola.bookstore.msbookformat.controller;
 
 import java.io.IOException;
 import java.util.List;
+
+import com.narola.bookstore.exception.ApplicationException;
 import com.narola.bookstore.msbookformat.model.MasterBookFormat;
 import com.narola.bookstore.msbookformat.service.IMasterBookService;
 import com.narola.bookstore.utility.ServiceFactory;
@@ -23,12 +25,15 @@ public class MasterBookFormatSearchServlet extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 			IMasterBookService iMasterBookService = ServiceFactory.getInstence().getMasterBookFormatService();
-			List<MasterBookFormat> searchMasterBookName = iMasterBookService
-					.searchMasterBookByName(request.getParameter("msBookName"));
-
-			request.setAttribute("listOfMasterBook", searchMasterBookName);
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Master-book-view.jsp");
-			requestDispatcher.forward(request, response);
+			String msBookName = request.getParameter("msBookName");
+			if (msBookName == null || msBookName.isEmpty()) {
+				throw new ApplicationException("Master Book Name can't be empty");
+			} else {
+				List<MasterBookFormat> searchMasterBookName = iMasterBookService.searchMasterBookByName(msBookName);
+				request.setAttribute("listOfMasterBook", searchMasterBookName);
+				RequestDispatcher requestDispatcher = request.getRequestDispatcher("Master-book-view.jsp");
+				requestDispatcher.forward(request, response);
+			}
 		} catch (Exception e) {
 			request.setAttribute("ErrorMessage", e.getMessage());
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Master-book-search.jsp");
