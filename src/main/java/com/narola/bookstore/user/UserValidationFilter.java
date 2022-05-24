@@ -23,7 +23,7 @@ public class UserValidationFilter implements Filter {
 		String userId = request.getParameter("userId");
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
-		
+
 		String contact = request.getParameter("contact");
 		String no = "^[0-9]{10}$";
 		Pattern pattern1 = Pattern.compile(no);
@@ -48,7 +48,7 @@ public class UserValidationFilter implements Filter {
 		String pincode = request.getParameter("pincode");
 		String city = request.getParameter("city");
 		String addressType = request.getParameter("addressType");
-		
+
 		String mobile = request.getParameter("mobile");
 		String no1 = "^[0-9]{10}$";
 		Pattern pattern4 = Pattern.compile(no1);
@@ -58,8 +58,7 @@ public class UserValidationFilter implements Filter {
 		String url = req.getRequestURI();
 		boolean isErrorExist = false;
 
-		if(userId == null || userId.trim().isEmpty())
-		{
+		if (userId == null || userId.trim().isEmpty()) {
 			request.setAttribute("errorMsgOfUserId", "Please check userId");
 			isErrorExist = true;
 		}
@@ -71,7 +70,7 @@ public class UserValidationFilter implements Filter {
 			request.setAttribute("errorMsgOflastName", "Please enter valid Last Name");
 			isErrorExist = true;
 		}
-		if (contact == null || contact.trim().isEmpty() || !m1.matches()) {// dout
+		if (contact == null || contact.trim().isEmpty() || !m1.matches()) {
 			request.setAttribute("errorMsgOfContact", "Please enter valid Contact No");
 			isErrorExist = true;
 		}
@@ -83,8 +82,7 @@ public class UserValidationFilter implements Filter {
 			request.setAttribute("errorMsgOfPassword", "Please enter valid Password");
 			isErrorExist = true;
 		}
-		if(addressId == null || addressId.trim().isEmpty())
-		{
+		if (addressId == null || addressId.trim().isEmpty()) {
 			request.setAttribute("errorMsgOfAddressId", "Please check addressId");
 			isErrorExist = true;
 		}
@@ -104,8 +102,7 @@ public class UserValidationFilter implements Filter {
 			request.setAttribute("errorMsgOfState", "Please select valid state");
 			isErrorExist = true;
 		}
-		if (pincode == null || pincode.trim().isEmpty() || pincode.length() != 6) // dout
-		{
+		if (pincode == null || pincode.trim().isEmpty() || pincode.length() != 6) {
 			request.setAttribute("errorMsgOfPincode", "Please enter valid pincode");
 			isErrorExist = true;
 		}
@@ -117,13 +114,13 @@ public class UserValidationFilter implements Filter {
 			request.setAttribute("errorMsgOfAddressType", "Please enter valid AddressType(example : Home, Office)");
 			isErrorExist = true;
 		}
-		if (mobile == null || mobile.trim().isEmpty() || !m4.matches()) {// dout
+		if (mobile == null || mobile.trim().isEmpty() || !m4.matches()) {
 			request.setAttribute("errorMsgOfMobileNo", "Please enter valid Mobile No");
 			isErrorExist = true;
 		}
-		
+
 		if (isErrorExist) {
-			if (url.equals(req.getContextPath() + Constant.USER_Update_URL)) {
+			if (url.equals(req.getContextPath() + Constant.USER_UPDATE_URL)) {
 				rd = request.getRequestDispatcher("User-update.jsp");
 				rd.forward(request, response);
 			}

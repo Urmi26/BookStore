@@ -12,6 +12,7 @@ import com.narola.bookstore.category.model.Categorry;
 import com.narola.bookstore.exception.ApplicationException;
 import com.narola.bookstore.exception.DatabaseException;
 import com.narola.bookstore.msbookformat.model.MasterBookFormat;
+import com.narola.bookstore.utility.Constant;
 import com.narola.bookstore.utility.DAOFactory;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -43,7 +44,7 @@ public class BookServiceImpl implements IBookService {
 				}
 			}
 			if (bookID > 0) {
-				response.sendRedirect(request.getContextPath() + "/DisplayBooks");
+				response.sendRedirect(request.getContextPath() + Constant.BOOK_DISPLAY_URL);
 			} else {
 				throw new ApplicationException("Sorry, Data is not submitted");
 			}
@@ -90,7 +91,7 @@ public class BookServiceImpl implements IBookService {
 			bookDAO.deleteQry(bookId);
 
 			if (bookId != 0) {
-				response.sendRedirect(request.getContextPath() + "/DisplayBooks");
+				response.sendRedirect(request.getContextPath() + Constant.BOOK_DISPLAY_URL);
 			} else {
 				throw new ApplicationException("Delete can't Records");
 			}
@@ -202,7 +203,7 @@ public class BookServiceImpl implements IBookService {
 			int status = bookDAO.updateQry(book);
 
 			if (status > 0) {
-				response.sendRedirect(request.getContextPath() + "/DisplayBooks");
+				response.sendRedirect(request.getContextPath() + Constant.BOOK_DISPLAY_URL);
 			} else {
 				throw new ApplicationException("record cann't updated..");
 			}
@@ -291,7 +292,7 @@ public class BookServiceImpl implements IBookService {
 			}
 			bookImgFolder = new File(path);
 			bookImgFolder.delete();
-			response.sendRedirect(request.getContextPath() + "/DisplayBooks");
+			response.sendRedirect(request.getContextPath() + Constant.BOOK_DISPLAY_URL);
 		} catch (DatabaseException | IOException e) {
 			throw new ApplicationException("Oops, Something went wrong..", e);
 		}

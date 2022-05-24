@@ -58,7 +58,6 @@ public class CartDAO {
 
 				listOfselectedBook.add(new Cart(cartId, user, quantity, amount, createdOn, book));
 			}
-			System.out.println("hello");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

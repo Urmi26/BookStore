@@ -29,6 +29,8 @@ public class UserPlaceOrderFromServlet extends HttpServlet {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Place-Order.jsp");
+			requestDispatcher.forward(request, response);
 		}
 	}
 

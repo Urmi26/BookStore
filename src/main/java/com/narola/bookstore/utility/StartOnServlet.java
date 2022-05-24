@@ -13,7 +13,6 @@ public class StartOnServlet extends HttpServlet {
 		try {
 			String dbType = getServletContext().getInitParameter("DB-IN-USE");
 			DAOFactory.getInstence().init(dbType);
-			
 			DBConnect.getInstance().setDburl(getServletContext().getInitParameter(dbType + "_dburl"));
 			DBConnect.getInstance().setDbname(getServletContext().getInitParameter(dbType + "_dbname"));
 			DBConnect.getInstance().setUsername(getServletContext().getInitParameter(dbType + "_username"));

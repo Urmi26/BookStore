@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 
 import com.narola.bookstore.book.service.IBookService;
 import com.narola.bookstore.book.service.Impl.BookServiceImpl;
+import com.narola.bookstore.exception.ApplicationException;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -41,18 +42,23 @@ public class UserCheckOtpServlet extends HttpServlet {
 					RequestDispatcher rd = request.getRequestDispatcher("Sign_up.jsp");
 					rd.forward(request, response);
 				} else {
-					int otp = Integer.parseInt(otpstr);
-					int userId = UserDAO.userCheckOtp(emailId, otp);
+					try {
+						int otp = Integer.parseInt(otpstr);
+						int userId = UserDAO.userCheckOtp(emailId, otp);
 
-					if (userId > 0) {
-						no = no.concat("3");
-						System.out.println("Your data Successfully Submitted");
-						request.setAttribute("userId", userId);
-						request.setAttribute("No", no);
+						if (userId > 0) {
+							no = no.concat("3");
+							request.setAttribute("userId", userId);
+							request.setAttribute("No", no);
+							RequestDispatcher requestDispatcher = request.getRequestDispatcher("Sign_up.jsp");
+							requestDispatcher.forward(request, response);
+						} else {
+							throw new ApplicationException("Your data has been not submitted");
+						}
+					} catch (ApplicationException e) {
+						e.printStackTrace();
 						RequestDispatcher requestDispatcher = request.getRequestDispatcher("Sign_up.jsp");
 						requestDispatcher.forward(request, response);
-					} else {
-						System.out.println("Your data has been not submitted");
 					}
 				}
 			} else {
@@ -74,21 +80,20 @@ public class UserCheckOtpServlet extends HttpServlet {
 				} else {
 
 					int status = UserDAO.updateQryOfPassword(Integer.parseInt(userID), password);
-
 					if (status > 0) {
-						System.out.println("Your data Successfully Updatted");
 						request.setAttribute("listOfCategory", iBookService.getAllCategory());
-
 						RequestDispatcher requestDispatcher = request.getRequestDispatcher("HomePage.jsp");
 						requestDispatcher.forward(request, response);
 					} else {
-						System.out.println("Your data has been not Updatted");
+						throw new ApplicationException("Your data has been not Updatted");
 					}
 				}
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Sign_up.jsp");
+			requestDispatcher.forward(request, response);
 		}
 
 	}

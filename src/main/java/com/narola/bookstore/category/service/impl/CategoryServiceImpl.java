@@ -7,6 +7,7 @@ import com.narola.bookstore.category.model.Categorry;
 import com.narola.bookstore.category.service.ICategoryService;
 import com.narola.bookstore.exception.ApplicationException;
 import com.narola.bookstore.exception.DatabaseException;
+import com.narola.bookstore.utility.Constant;
 import com.narola.bookstore.utility.DAOFactory;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,7 +21,7 @@ public class CategoryServiceImpl implements ICategoryService {
 			ICategoryDAO categoryDAO = DAOFactory.getInstence().getCategoryDAO();
 			int status = categoryDAO.insertQry(categoryName);
 			if (status > 0) {
-				response.sendRedirect(request.getContextPath() + "/DisplayCategories");
+				response.sendRedirect(request.getContextPath() + Constant.CATEGORY_DISPLAY_URL);
 			} else {
 				throw new ApplicationException("Sorry, Category Data is not saved.");
 			}
@@ -36,7 +37,7 @@ public class CategoryServiceImpl implements ICategoryService {
 			int status = categoryDAO.deleleQry(categoryId);
 
 			if (status > 0) {
-				res.sendRedirect(req.getContextPath() + "/DisplayCategories");
+				res.sendRedirect(req.getContextPath() + Constant.CATEGORY_DISPLAY_URL);
 			} else {
 				throw new ApplicationException("Record can't deleted");
 			}
@@ -81,7 +82,7 @@ public class CategoryServiceImpl implements ICategoryService {
 			ICategoryDAO categoryDAO = DAOFactory.getInstence().getCategoryDAO();
 			int status = categoryDAO.updateQry(category);
 			if (status > 0) {
-				response.sendRedirect(request.getContextPath() + "/DisplayCategories");
+				response.sendRedirect(request.getContextPath() + Constant.CATEGORY_DISPLAY_URL);
 			} else {
 				throw new ApplicationException("record cann't updated..");
 			}

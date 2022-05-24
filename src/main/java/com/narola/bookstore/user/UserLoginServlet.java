@@ -3,6 +3,8 @@ package com.narola.bookstore.user;
 import java.io.IOException;
 import com.narola.bookstore.book.service.IBookService;
 import com.narola.bookstore.book.service.Impl.BookServiceImpl;
+import com.narola.bookstore.exception.ApplicationException;
+
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -51,22 +53,22 @@ public class UserLoginServlet extends HttpServlet {
 						RequestDispatcher requestDispatcher = request.getRequestDispatcher("HomePage.jsp");
 						requestDispatcher.forward(request, response);
 					} else if (user.getUserType() == 2) {
-
 						RequestDispatcher requestDispatcher = request.getRequestDispatcher("AdminHomePage.jsp");
 						requestDispatcher.forward(request, response);
 					}
 
 				} else {
-					System.out.println("Data isn't Match ");
 					request.setAttribute("errorMsgOfData", "Please Enter valid data, Your data has been not match !!");
 					RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.jsp");
 					requestDispatcher.forward(request, response);
-
+					throw new ApplicationException("Data isn't Match ");
 				}
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.jsp");
+			requestDispatcher.forward(request, response);
 		}
 	}
 

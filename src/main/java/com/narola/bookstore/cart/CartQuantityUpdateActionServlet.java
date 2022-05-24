@@ -2,6 +2,10 @@ package com.narola.bookstore.cart;
 
 import java.io.IOException;
 
+import com.narola.bookstore.exception.ApplicationException;
+import com.narola.bookstore.utility.Constant;
+
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,18 +22,19 @@ public class CartQuantityUpdateActionServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 		try {
-			String cartId=request.getParameter("cartId");
-			String quantity=request.getParameter("quantity");
-			
-			int status=CartDAO.updateQry(Integer.parseInt(cartId), Integer.parseInt(quantity));
+			String cartId = request.getParameter("cartId");
+			String quantity = request.getParameter("quantity");
+
+			int status = CartDAO.updateQry(Integer.parseInt(cartId), Integer.parseInt(quantity));
 			if (status > 0) {
-				System.out.println("Updated..");
-				response.sendRedirect(request.getContextPath() + "/DisplaySelectedBook");
+				response.sendRedirect(request.getContextPath() + Constant.BOOK_DISPLAY_SELECTED_URL);
 			} else {
-				System.out.println("record cann't updated..");
+				throw new ApplicationException("quantity cann't update..");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Add-To-Cart.jsp");
+			requestDispatcher.forward(request, response);
 		}
 	}
 }

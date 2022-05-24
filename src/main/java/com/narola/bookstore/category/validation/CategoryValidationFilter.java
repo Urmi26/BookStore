@@ -32,7 +32,6 @@ public class CategoryValidationFilter implements Filter {
 				isErrorExist = true;
 			}
 		}
-
 		if (isErrorExist) {
 			if (url.equals(request.getContextPath() + Constant.CATEGORY_ADD_URL)) {
 				RequestDispatcher rd = req.getRequestDispatcher("Category-form.jsp");

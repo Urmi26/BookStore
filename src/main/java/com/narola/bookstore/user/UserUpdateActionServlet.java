@@ -3,7 +3,9 @@ package com.narola.bookstore.user;
 import java.io.IOException;
 
 import com.narola.bookstore.address.Address;
+import com.narola.bookstore.exception.ApplicationException;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
@@ -50,13 +52,14 @@ public class UserUpdateActionServlet extends HttpServlet{
 			
 			if(status>0)
 			{
-				System.out.println("Your data Successfully Submitted");
 				response.sendRedirect(request.getContextPath() + "/HomePageOfUser");
 			}else {
-				System.out.println("Sorry, Data is not saved");
+				throw new ApplicationException("Sorry, Data is not submitted");
 			}
-		} catch (Exception e) {
+		} catch (ApplicationException e) {
 			e.printStackTrace();
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("User-update.jsp");
+			requestDispatcher.forward(request, response);
 		}
 		
 	}

@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.narola.bookstore.exception.ApplicationException;
+
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -40,18 +43,18 @@ public class UserSignUpServlet extends HttpServlet {
 
 				if (status > 0) {
 					no = no.concat("2");
-					System.out.println("Your data Successfully Submitted");
 					request.setAttribute("No", no);
 					request.setAttribute("emailId", emailId);
 					RequestDispatcher requestDispatcher = request.getRequestDispatcher("Sign_up.jsp");
 					requestDispatcher.forward(request, response);
 				} else {
-					System.out.println("Your data has been not submitted");
+					throw new ApplicationException("Your data has been not submitted");
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Sign_up.jsp");
+			requestDispatcher.forward(request, response);
 		}
-
 	}
 }

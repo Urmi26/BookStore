@@ -7,6 +7,7 @@ import com.narola.bookstore.exception.DatabaseException;
 import com.narola.bookstore.msbookformat.dao.IMasterBookFormatDAO;
 import com.narola.bookstore.msbookformat.model.MasterBookFormat;
 import com.narola.bookstore.msbookformat.service.IMasterBookService;
+import com.narola.bookstore.utility.Constant;
 import com.narola.bookstore.utility.DAOFactory;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,7 +33,7 @@ public class MasterBookServiceImpl implements IMasterBookService {
 			int status = masterBookFormatDAO.insertQry(msbookformatName);
 
 			if (status > 0) {
-				response.sendRedirect(request.getContextPath() + "/DisplayMSBooks");
+				response.sendRedirect(request.getContextPath() + Constant.MASTER_BOOK_FORMAT_DISPLAY_URL);
 			} else {
 				throw new ApplicationException("Data con't be submited");
 			}
@@ -42,13 +43,14 @@ public class MasterBookServiceImpl implements IMasterBookService {
 	}
 
 	@Override
-	public void deleteMasterBookFormat(int msBookId, HttpServletRequest request, HttpServletResponse response) throws ApplicationException {
+	public void deleteMasterBookFormat(int msBookId, HttpServletRequest request, HttpServletResponse response)
+			throws ApplicationException {
 		try {
 			IMasterBookFormatDAO masterBookFormatDAO = DAOFactory.getInstence().getMasterBookFormatDAO();
 			int status = masterBookFormatDAO.deleteQry(msBookId);
 
 			if (status > 0) {
-				response.sendRedirect(request.getContextPath() + "/DisplayMSBooks");
+				response.sendRedirect(request.getContextPath() + Constant.MASTER_BOOK_FORMAT_DISPLAY_URL);
 			} else {
 				throw new ApplicationException("Data can't be deleted..");
 			}
@@ -75,7 +77,7 @@ public class MasterBookServiceImpl implements IMasterBookService {
 			IMasterBookFormatDAO masterBookFormatDAO = DAOFactory.getInstence().getMasterBookFormatDAO();
 			int status = masterBookFormatDAO.updateQry(masterBookFormat);
 			if (status > 0) {
-				response.sendRedirect(request.getContextPath() + "/DisplayMSBooks");
+				response.sendRedirect(request.getContextPath() + Constant.MASTER_BOOK_FORMAT_DISPLAY_URL);
 			} else {
 				throw new ApplicationException("Data can't be updated");
 			}
