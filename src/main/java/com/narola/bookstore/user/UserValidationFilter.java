@@ -19,7 +19,6 @@ public class UserValidationFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		RequestDispatcher rd = null;
-		System.out.println("InFilter");
 		String userId = request.getParameter("userId");
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
@@ -33,7 +32,6 @@ public class UserValidationFilter implements Filter {
 		String email = "^[A-Za-z0-9+_.-]+@(.+)$";
 		Pattern pattern2 = Pattern.compile(email);
 		Matcher m2 = pattern2.matcher(emailId);
-		System.out.println(m2.matches());
 
 		String password = request.getParameter("password");
 		String pwd = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{6,8}$";

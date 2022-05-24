@@ -3,7 +3,9 @@ package com.narola.bookstore.book.controller;
 import java.io.IOException;
 import com.narola.bookstore.book.service.IBookService;
 import com.narola.bookstore.exception.ApplicationException;
+import com.narola.bookstore.utility.Constant;
 import com.narola.bookstore.utility.ServiceFactory;
+
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -17,15 +19,16 @@ public class AddBookFormServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		IBookService iBookService = ServiceFactory.getInstence().getBookService();
 		try {
-			IBookService iBookService = ServiceFactory.getInstence().getBookService();
 			request.setAttribute("listOfCategory", iBookService.getAllCategory());
 			request.setAttribute("listOfMsBookFormat", iBookService.getAllMasterBookFormat());
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Book-Form.jsp");
 			requestDispatcher.forward(request, response);
 		} catch (ApplicationException e) {
-			request.setAttribute("ErrorMessage", e.getMessage());
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Book-Form.jsp");
+			e.printStackTrace();
+			request.setAttribute(Constant.ERROR, e.getMessage());
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Errorpage.jsp");
 			requestDispatcher.forward(request, response);
 		}
 	}

@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 import com.narola.bookstore.book.service.IBookService;
 import com.narola.bookstore.book.service.Impl.BookServiceImpl;
 import com.narola.bookstore.exception.ApplicationException;
+import com.narola.bookstore.utility.Constant;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -91,8 +92,8 @@ public class UserCheckOtpServlet extends HttpServlet {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Sign_up.jsp");
+			request.setAttribute(Constant.ERROR, e.getMessage());
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Errorpage.jsp");
 			requestDispatcher.forward(request, response);
 		}
 

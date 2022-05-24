@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@page import="java.util.*"%>
 <%@page import="com.narola.bookstore.book.model.Book"%>
-
+<%@page import="com.narola.bookstore.utility.Constant"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,77 +39,64 @@ body {
 		<jsp:include page="Header.jsp" />
 	</section>
 	<section id="interface1">
-		<div>
-			<%
-			if (request.getAttribute("ErrorMessage") == null) {
-			%>
-			<%
-			} else {
-			%>
-			<p>
-				<font color="red"><b><%=request.getAttribute("ErrorMessage")%></b></font>
-			</p>
-			<%
-			}
-			%>
-		</div>
-		<form action="<%=request.getContextPath()%>/DisplayBooks" method="get">
-			<%
-			List<Book> books = (ArrayList) request.getAttribute("listOfBook");
-			%>
-			<table border="1">
-				<caption>
-					<td colspan=12 align="center" height="20"><b><font
-							size="5px">Book Data</font></b></td>
-				</caption>
-				<tr>
-					<td colspan=12 align="left" height="20"><b><font
-							size="4px"><a
-								href="<%=request.getContextPath()%>/Book-Search.jsp">Search
-									Book</a></font></b></td>
-				</tr>
-				<tr>
-					<td colspan=12 align="right" height="20"><b><font
-							size="4px"><a
-								href="<%=request.getContextPath()%>/addbookform">Add New
-									Book</a></font></b></td>
-				</tr>
+			<form action="<%=request.getContextPath()%>/DisplayBooks"
+				method="get">
+				<%
+				List<Book> books = (ArrayList) request.getAttribute("listOfBook");
+				%>
+				<table border="1">
+					<caption>
+						<td colspan=12 align="center" height="20"><b><font
+								size="5px">Book Data</font></b></td>
+					</caption>
+					<tr>
+						<td colspan=12 align="left" height="20"><b><font
+								size="4px"><a
+									href="<%=request.getContextPath()%>/Book-Search.jsp">Search
+										Book</a></font></b></td>
+					</tr>
+					<tr>
+						<td colspan=12 align="right" height="20"><b><font
+								size="4px"><a
+									href="<%=request.getContextPath()%>/addbookform">Add New
+										Book</a></font></b></td>
+					</tr>
 
-				<tr height="20">
-					<th>Books Id</th>
-					<th>Book Name</th>
-					<th>Author Name</th>
-					<th>Description</th>
-					<th>Amount</th>
-					<th>Category Name</th>
-					<th>Publisher Name</th>
-					<th>Createdon</th>
-					<th>Updatedon</th>
-					<th colspan=2>Action</th>
-				</tr>
-				<%
-				for (Book book : books) {
-				%>
-				<tr>
-					<td><%=book.getBookId()%></td>
-					<td><%=book.getBookName()%></td>
-					<td><%=book.getAuthorName()%></td>
-					<td><%=book.getDescription()%></td>
-					<td><%=book.getAmount()%></td>
-					<td><%=book.category.getCategoryName()%></td>
-					<td><%=book.getPublisherName()%></td>
-					<td><%=book.getCreatedOn()%></td>
-					<td><%=book.getUpdatedOn()%></td>
-					<td><a
-						href="<%=request.getContextPath()%>/UpdateBookForm?bookId=<%=book.getBookId()%>">Update</a></td>
-					<td><a
-						href="<%=request.getContextPath()%>/ViewBookForm?bookId=<%=book.getBookId()%>">View</a></td>
-				</tr>
-				<%
-				}
-				%>
-			</table>
-		</form>
+					<tr height="20">
+						<th>Books Id</th>
+						<th>Book Name</th>
+						<th>Author Name</th>
+						<th>Description</th>
+						<th>Amount</th>
+						<th>Category Name</th>
+						<th>Publisher Name</th>
+						<th>Createdon</th>
+						<th>Updatedon</th>
+						<th colspan=2>Action</th>
+					</tr>
+					<%
+					for (Book book : books) {
+					%>
+					<tr>
+						<td><%=book.getBookId()%></td>
+						<td><%=book.getBookName()%></td>
+						<td><%=book.getAuthorName()%></td>
+						<td><%=book.getDescription()%></td>
+						<td><%=book.getAmount()%></td>
+						<td><%=book.category.getCategoryName()%></td>
+						<td><%=book.getPublisherName()%></td>
+						<td><%=book.getCreatedOn()%></td>
+						<td><%=book.getUpdatedOn()%></td>
+						<td><a
+							href="<%=request.getContextPath()%>/UpdateBookForm?bookId=<%=book.getBookId()%>">Update</a></td>
+						<td><a
+							href="<%=request.getContextPath()%>/ViewBookForm?bookId=<%=book.getBookId()%>">View</a></td>
+					</tr>
+					<%
+					}
+					%>
+				</table>
+			</form>
 	</section>
 
 	<section id="footer">

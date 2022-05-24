@@ -4,6 +4,7 @@ import java.io.IOException;
 import com.narola.bookstore.book.service.IBookService;
 import com.narola.bookstore.book.service.Impl.BookServiceImpl;
 import com.narola.bookstore.exception.ApplicationException;
+import com.narola.bookstore.utility.Constant;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -66,7 +67,7 @@ public class UserLoginServlet extends HttpServlet {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			request.setAttribute(Constant.ERROR, e.getMessage());
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.jsp");
 			requestDispatcher.forward(request, response);
 		}

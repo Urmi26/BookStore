@@ -4,7 +4,9 @@ import java.io.IOException;
 
 import com.narola.bookstore.address.Address;
 import com.narola.bookstore.user.User;
+import com.narola.bookstore.utility.Constant;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,11 +26,8 @@ public class OrderAddActionServlet extends HttpServlet {
 		try {
 			HttpSession session = request.getSession(false);
 			User user1 = (User) session.getAttribute("user");
-			if (user1 == null) {
-				System.out.println("user null");
-			} else {
+			if (user1 != null) {
 				int userId = user1.getUserId();
-
 				User user = new User();
 				user.setUserId(userId);
 
@@ -47,18 +46,13 @@ public class OrderAddActionServlet extends HttpServlet {
 				order.setAddress(address);
 				order.setTotalAmount(Double.parseDouble(request.getParameter("totalAmount")));
 
-				int status = OrderDAO.insertQry(order);
-
-				if (status > 0) {
-					System.out.println("Your data Successfully Submitted");
-					response.sendRedirect(request.getContextPath() + "/HomePageOfUser");
-
-				} else {
-					System.out.println("Your data Unsuccessfully Submitted");
-				}
+				OrderDAO.insertQry(order);
+				response.sendRedirect(request.getContextPath() + "/HomePageOfUser");
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			request.setAttribute(Constant.ERROR, e.getMessage());
+			RequestDispatcher rd = request.getRequestDispatcher("Book-Display.jsp");
+			rd.forward(request, response);
 		}
 
 	}

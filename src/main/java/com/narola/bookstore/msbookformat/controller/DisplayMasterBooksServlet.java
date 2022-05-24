@@ -3,6 +3,7 @@ package com.narola.bookstore.msbookformat.controller;
 import java.io.IOException;
 
 import com.narola.bookstore.msbookformat.service.IMasterBookService;
+import com.narola.bookstore.utility.Constant;
 import com.narola.bookstore.utility.ServiceFactory;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -22,8 +23,8 @@ public class DisplayMasterBooksServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("Master-book-list.jsp");
 			rd.forward(request, response);
 		} catch (Exception e) {
-			e.printStackTrace();
-			RequestDispatcher rd = request.getRequestDispatcher("Master-book-list.jsp");
+			request.setAttribute(Constant.ERROR, e.getMessage());
+			RequestDispatcher rd = request.getRequestDispatcher("Errorpage.jsp");
 			rd.forward(request, response);
 		}
 	}

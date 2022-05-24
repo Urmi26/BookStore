@@ -5,6 +5,8 @@ import java.util.List;
 import com.narola.bookstore.book.service.IBookService;
 import com.narola.bookstore.book.service.Impl.BookServiceImpl;
 import com.narola.bookstore.user.User;
+import com.narola.bookstore.utility.Constant;
+
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -44,7 +46,10 @@ public class DisplayTotalSelectBook extends HttpServlet {
 			requestDispatcher.forward(request, response);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			request.setAttribute(Constant.ERROR, e.getMessage());
+			request.setAttribute("listOfCategory", iBookService.getAllCategory());
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Add-To-Cart.jsp");
+			requestDispatcher.forward(request, response);
 		}
 	}
 }

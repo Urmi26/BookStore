@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import com.narola.bookstore.address.Address;
 import com.narola.bookstore.exception.ApplicationException;
+import com.narola.bookstore.utility.Constant;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -57,8 +58,8 @@ public class UserUpdateActionServlet extends HttpServlet{
 				throw new ApplicationException("Sorry, Data is not submitted");
 			}
 		} catch (ApplicationException e) {
-			e.printStackTrace();
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("User-update.jsp");
+			request.setAttribute(Constant.ERROR, e.getMessage());
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Errorpage.jsp");
 			requestDispatcher.forward(request, response);
 		}
 		

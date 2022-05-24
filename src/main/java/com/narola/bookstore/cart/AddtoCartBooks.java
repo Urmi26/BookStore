@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import com.narola.bookstore.exception.ApplicationException;
 import com.narola.bookstore.user.User;
+import com.narola.bookstore.utility.Constant;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -38,7 +39,7 @@ public class AddtoCartBooks extends HttpServlet {
 				throw new ApplicationException("record can't inserted");
 			}
 		} catch (ApplicationException e) {
-			e.printStackTrace();
+			request.setAttribute(Constant.ERROR, e.getMessage());
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Add-To-Cart.jsp");
 			requestDispatcher.forward(request, response);
 		}

@@ -3,6 +3,7 @@ package com.narola.bookstore.book.controller;
 import java.io.IOException;
 import com.narola.bookstore.book.service.IBookService;
 import com.narola.bookstore.exception.ApplicationException;
+import com.narola.bookstore.utility.Constant;
 import com.narola.bookstore.utility.ServiceFactory;
 
 import jakarta.servlet.RequestDispatcher;
@@ -17,14 +18,15 @@ public class ImageDeleteServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		IBookService iBookService = ServiceFactory.getInstence().getBookService();
 		try {
-			IBookService iBookService = ServiceFactory.getInstence().getBookService();
-			iBookService.deleteImage(request, response);
-			
+			iBookService.deleteImage(request);
+			response.sendRedirect(request.getContextPath() + Constant.BOOK_DISPLAY_URL);
 		} catch (ApplicationException e) {
-			request.setAttribute("ErrorMessage", e.getMessage());
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Book-update.jsp");
+			request.setAttribute(Constant.ERROR, e.getMessage());
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Errorpage.jsp");
 			requestDispatcher.forward(request, response);
+			
 		}
 	}
 

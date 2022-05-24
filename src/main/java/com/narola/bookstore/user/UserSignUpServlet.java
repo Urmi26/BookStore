@@ -6,6 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.narola.bookstore.exception.ApplicationException;
+import com.narola.bookstore.utility.Constant;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -52,7 +53,7 @@ public class UserSignUpServlet extends HttpServlet {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			request.setAttribute(Constant.ERROR, e.getMessage());
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Sign_up.jsp");
 			requestDispatcher.forward(request, response);
 		}

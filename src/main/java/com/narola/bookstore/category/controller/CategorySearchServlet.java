@@ -3,6 +3,7 @@ package com.narola.bookstore.category.controller;
 import java.io.IOException;
 import com.narola.bookstore.category.service.ICategoryService;
 import com.narola.bookstore.exception.ApplicationException;
+import com.narola.bookstore.utility.Constant;
 import com.narola.bookstore.utility.ServiceFactory;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -27,8 +28,8 @@ public class CategorySearchServlet extends HttpServlet {
 				requestDispatcher.forward(request, response);
 			}
 		} catch (Exception e) {
-			request.setAttribute("ErrorMessage", e.getMessage());
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Category-search.jsp");
+			request.setAttribute(Constant.ERROR, e.getMessage());
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Errorpage.jsp");
 			requestDispatcher.forward(request, response);
 		}
 	}

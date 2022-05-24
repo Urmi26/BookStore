@@ -32,7 +32,7 @@ public class CartQuantityUpdateActionServlet extends HttpServlet {
 				throw new ApplicationException("quantity cann't update..");
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			request.setAttribute(Constant.ERROR, e.getMessage());
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Add-To-Cart.jsp");
 			requestDispatcher.forward(request, response);
 		}

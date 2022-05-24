@@ -3,6 +3,8 @@ package com.narola.bookstore.user;
 import java.io.IOException;
 import com.narola.bookstore.book.service.IBookService;
 import com.narola.bookstore.book.service.Impl.BookServiceImpl;
+import com.narola.bookstore.utility.Constant;
+
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -28,8 +30,8 @@ public class UserPlaceOrderFromServlet extends HttpServlet {
 			requestDispatcher.forward(request, response);
 
 		} catch (Exception e) {
-			e.printStackTrace();
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Place-Order.jsp");
+			request.setAttribute(Constant.ERROR, e.getMessage());
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Errorpage.jsp");
 			requestDispatcher.forward(request, response);
 		}
 	}

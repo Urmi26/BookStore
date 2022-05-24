@@ -18,7 +18,6 @@ public class StartOnServlet extends HttpServlet {
 			DBConnect.getInstance().setUsername(getServletContext().getInitParameter(dbType + "_username"));
 			DBConnect.getInstance().setPassword(getServletContext().getInitParameter(dbType + "_password"));
 			DBConnect.getInstance().initializedConnection();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

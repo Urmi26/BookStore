@@ -5,7 +5,8 @@ public class Constant {
 	private Constant() {
 		throw new IllegalStateException("Utility class");
 	}
-	//public static final String ERROR = "ErrorMessage";
+	public static final String ERROR = "ErrorMessage";
+	public static final String BACKSLASH_URL_USED = "\\";
 
 	public static final String CATEGORY_ADD_URL = "/AddCategory";
 	public static final String CATEGORY_UPDATE_URL = "/UpdateCategory";

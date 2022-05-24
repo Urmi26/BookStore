@@ -15,7 +15,6 @@ public class CategoryValidationFilter implements Filter {
 
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain arg1)
 			throws IOException, ServletException {
-		System.out.println("InFilter");
 		String categoryName = req.getParameter("categoryName");
 		HttpServletRequest request = (HttpServletRequest) req;
 		String url = request.getRequestURI();

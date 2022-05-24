@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="com.narola.bookstore.user.User"%>
-
+<%@page import="com.narola.bookstore.utility.Constant"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,14 +19,14 @@ table {
 <title>Insert title here</title>
 </head>
 <body bgcolor="whitesmoke">
+
 	<%
 	String click = (String) request.getAttribute("No");
 	%>
 	<%
 	System.out.print(click);
 	if (click == null || click.matches("1")) {
-	%>
-	<form action="<%=request.getContextPath()%>/UserSignUpServlet"
+	%><form action="<%=request.getContextPath()%>/UserSignUpServlet"
 		method="post">
 		<table>
 			<tr>
@@ -34,10 +34,8 @@ table {
 			</tr>
 			<tr>
 				<td>Email Id <font color="red">*</font></td>
-				<td>
-				<input type="email" name="emailId" size="25"
-					placeholder="Email Id" />
-				</td>
+				<td><input type="email" name="emailId" size="25"
+					placeholder="Email Id" /></td>
 				<%
 				if (request.getAttribute("errorMsgOfEmailId") == null) {
 				%>
@@ -123,5 +121,6 @@ table {
 	<%
 	}
 	%>
+
 </body>
 </html>

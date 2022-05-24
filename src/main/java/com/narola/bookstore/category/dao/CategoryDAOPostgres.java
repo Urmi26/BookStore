@@ -31,7 +31,7 @@ public class CategoryDAOPostgres implements ICategoryDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when display Category Details" + e.getMessage());
+			throw new DatabaseException("Exceptions when display Category Details", e);
 		} finally {
 			DBConnect.closeResource(ps, rs);
 		}
@@ -50,7 +50,7 @@ public class CategoryDAOPostgres implements ICategoryDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when entering Category details" + e.getMessage());
+			throw new DatabaseException("Exceptions when entering Category details", e);
 		} finally {
 			DBConnect.closeResource(stmt);
 		}
@@ -69,7 +69,7 @@ public class CategoryDAOPostgres implements ICategoryDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when Deleting Category details" + e.getMessage());
+			throw new DatabaseException("Exceptions when Deleting Category details", e);
 		} finally {
 			DBConnect.closeResource(ps);
 		}
@@ -90,7 +90,7 @@ public class CategoryDAOPostgres implements ICategoryDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when Updating Category details" + e.getMessage());
+			throw new DatabaseException("Exceptions when Updating Category details", e);
 		} finally {
 			DBConnect.closeResource(ps);
 		}
@@ -114,8 +114,7 @@ public class CategoryDAOPostgres implements ICategoryDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException(
-					"Exceptions when get Update Category Data Fetch By Id details" + e.getMessage());
+			throw new DatabaseException("Exceptions when get Update Category Data Fetch By Id details", e);
 		} finally {
 			DBConnect.closeResource(ps);
 		}
@@ -143,7 +142,7 @@ public class CategoryDAOPostgres implements ICategoryDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when show category data by Name details" + e.getMessage());
+			throw new DatabaseException("Exceptions when show category data by Name details", e);
 		} finally {
 			DBConnect.closeResource(ps, rs);
 		}

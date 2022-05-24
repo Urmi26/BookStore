@@ -22,15 +22,24 @@ public class ServiceFactory {
 	}
 
 	public IBookService getBookService() {
-		return new BookServiceImpl();
+		if (iBookService == null) {
+			iBookService = new BookServiceImpl();
+		}
+		return iBookService;
 	}
 
 	public ICategoryService getCategoryService() {
-		return new CategoryServiceImpl();
+		if (iCategoryService == null) {
+			iCategoryService = new CategoryServiceImpl();
+		}
+		return iCategoryService;
 	}
 
 	public IMasterBookService getMasterBookFormatService() {
-		return new MasterBookServiceImpl();
+		if (iMasterBookService == null) {
+			iMasterBookService = new MasterBookServiceImpl();
+		}
+		return iMasterBookService;
 	}
 
 }

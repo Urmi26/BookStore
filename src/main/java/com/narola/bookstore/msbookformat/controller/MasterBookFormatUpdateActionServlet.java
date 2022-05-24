@@ -3,6 +3,7 @@ package com.narola.bookstore.msbookformat.controller;
 import java.io.IOException;
 import com.narola.bookstore.msbookformat.model.MasterBookFormat;
 import com.narola.bookstore.msbookformat.service.IMasterBookService;
+import com.narola.bookstore.utility.Constant;
 import com.narola.bookstore.utility.ServiceFactory;
 
 import jakarta.servlet.RequestDispatcher;
@@ -24,22 +25,22 @@ public class MasterBookFormatUpdateActionServlet extends HttpServlet {
 		try {
 			String msBookName = request.getParameter("msBookName");
 			int msBookId = Integer.parseInt(request.getParameter("msBookId"));
-			
+
 			if (msBookName == null || msBookName.trim().isEmpty()) {
 				request.setAttribute("errorMsg", "Please enter valid category name");
 				request.setAttribute("MasterBook", new MasterBookFormat(Integer.parseInt(msBookName)));
 				RequestDispatcher rd = request.getRequestDispatcher("Master-book-update.jsp");
 				rd.forward(request, response);
-				
+
 			} else {
 				IMasterBookService iMasterBookService = ServiceFactory.getInstence().getMasterBookFormatService();
 				MasterBookFormat masterBookFormat = new MasterBookFormat(msBookId, msBookName);
-				iMasterBookService.updateMasterBookFormat(masterBookFormat, request, response);
-				
+				iMasterBookService.updateMasterBookFormat(masterBookFormat, request);
+				response.sendRedirect(request.getContextPath() + Constant.MASTER_BOOK_FORMAT_DISPLAY_URL);
 			}
 		} catch (Exception e) {
-			request.setAttribute("ErrorMessage", e.getMessage());
-			RequestDispatcher rd = request.getRequestDispatcher("Master-book-update.jsp");
+			request.setAttribute(Constant.ERROR, e.getMessage());
+			RequestDispatcher rd = request.getRequestDispatcher("Errorpage.jsp");
 			rd.forward(request, response);
 		}
 

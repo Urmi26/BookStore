@@ -30,7 +30,7 @@ public class CartDeleteActionServlet extends HttpServlet {
 				throw new ApplicationException("Record can't deleted");
 			}
 		} catch (ApplicationException e) {
-			e.printStackTrace();
+			request.setAttribute(Constant.ERROR, e.getMessage());
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Add-To-Cart.jsp");
 			requestDispatcher.forward(request, response);
 		}

@@ -3,7 +3,6 @@ package com.narola.bookstore.msbookformat.validation;
 import com.narola.bookstore.msbookformat.model.MasterBookFormat;
 import com.narola.bookstore.utility.Constant;
 import java.io.IOException;
-
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.RequestDispatcher;
@@ -16,7 +15,6 @@ public class MSBookFormatValidationFilter implements Filter {
 
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain arg3)
 			throws IOException, ServletException {
-		System.out.println("In MSBookFormatValidationFilter");
 		String msBookName = req.getParameter("msBookName");
 		HttpServletRequest request = (HttpServletRequest) req;
 		String url = request.getRequestURI();

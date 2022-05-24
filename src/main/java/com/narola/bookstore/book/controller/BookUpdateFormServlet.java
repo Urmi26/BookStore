@@ -4,6 +4,7 @@ import java.io.IOException;
 import com.narola.bookstore.book.model.Book;
 import com.narola.bookstore.book.service.IBookService;
 import com.narola.bookstore.exception.ApplicationException;
+import com.narola.bookstore.utility.Constant;
 import com.narola.bookstore.utility.ServiceFactory;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -32,8 +33,8 @@ public class BookUpdateFormServlet extends HttpServlet {
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Book-update.jsp");
 			requestDispatcher.forward(request, response);
 		} catch (ApplicationException e) {
-			e.printStackTrace();
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Book-List.jsp");
+			request.setAttribute(Constant.ERROR, e.getMessage());
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Errorpage.jsp");
 			requestDispatcher.forward(request, response);
 
 		}

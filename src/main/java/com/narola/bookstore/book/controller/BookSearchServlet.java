@@ -3,6 +3,7 @@ package com.narola.bookstore.book.controller;
 import java.io.IOException;
 import com.narola.bookstore.book.service.IBookService;
 import com.narola.bookstore.exception.ApplicationException;
+import com.narola.bookstore.utility.Constant;
 import com.narola.bookstore.utility.ServiceFactory;
 
 import jakarta.servlet.RequestDispatcher;
@@ -34,8 +35,8 @@ public class BookSearchServlet extends HttpServlet {
 				requestDispatcher.forward(request, response);
 			}
 		} catch (ApplicationException e) {
-			request.setAttribute("ErrorMessage", e.getMessage());
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Book-Search.jsp");
+			request.setAttribute(Constant.ERROR, e.getMessage());
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Errorpage.jsp");
 			requestDispatcher.forward(request, response);
 		}
 	}

@@ -3,7 +3,7 @@
 <%@page import="java.util.*"%>
 <%@page import="java.io.File"%>
 <%@page import="com.narola.bookstore.cart.Cart"%>
-
+<%@page import="com.narola.bookstore.utility.Constant"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -158,6 +158,8 @@ body {
 		<%
 		}
 		%>
+
+
 	</section>
 	<section id="footer">
 		<jsp:include page="Footer.jsp" />

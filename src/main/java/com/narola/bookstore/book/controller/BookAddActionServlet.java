@@ -6,6 +6,7 @@ import com.narola.bookstore.book.model.Book;
 import com.narola.bookstore.book.service.IBookService;
 import com.narola.bookstore.exception.ApplicationException;
 import com.narola.bookstore.msbookformat.model.MasterBookFormat;
+import com.narola.bookstore.utility.Constant;
 import com.narola.bookstore.utility.ServiceFactory;
 
 import jakarta.servlet.RequestDispatcher;
@@ -22,8 +23,8 @@ public class BookAddActionServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		IBookService iBookService = ServiceFactory.getInstence().getBookService();
 		try {
-			IBookService iBookService = ServiceFactory.getInstence().getBookService();
 			Book book = new Book();
 			book.setBookName(request.getParameter("bookName"));
 			book.setAuthorName(request.getParameter("authorName"));
@@ -34,10 +35,13 @@ public class BookAddActionServlet extends HttpServlet {
 			MasterBookFormat masterBookFormat = new MasterBookFormat();
 			masterBookFormat.setMsBookIdList((request.getParameterValues("msBookId")));
 			book.setMasterBookFormat(masterBookFormat);
-			iBookService.addBook(book, request, response);
+			iBookService.addBook(book, request);
+			
+			response.sendRedirect(request.getContextPath() + Constant.BOOK_DISPLAY_URL);
 		} catch (ApplicationException e) {
-			request.setAttribute("ErrorMessage", e.getMessage());
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Book-Form.jsp");
+			e.printStackTrace();
+			request.setAttribute(Constant.ERROR, e.getMessage());
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Errorpage.jsp");
 			requestDispatcher.forward(request, response);
 		}
 

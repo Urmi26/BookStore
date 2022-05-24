@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import com.narola.bookstore.book.model.Book;
 import com.narola.bookstore.category.model.Categorry;
 import com.narola.bookstore.exception.DatabaseException;
@@ -15,7 +14,6 @@ import com.narola.bookstore.msbookformat.model.MasterBookFormat;
 import com.narola.bookstore.utility.DBConnect;
 
 public class BookDAOPostgres implements IBookDAO {
-
 	public List<Book> getAllBooks() throws DatabaseException {
 		List<Book> listOfBook = new ArrayList<>();
 		PreparedStatement preparedStatement = null;
@@ -47,7 +45,7 @@ public class BookDAOPostgres implements IBookDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when display all book details" + e.getMessage());
+			throw new DatabaseException("Exceptions when display all book details", e);
 		} finally {
 			DBConnect.closeResource(preparedStatement, resultSet);
 		}
@@ -92,7 +90,7 @@ public class BookDAOPostgres implements IBookDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when entering book and book_format details" + e.getMessage());
+			throw new DatabaseException("Exceptions when entering book and book_format details", e);
 		} finally {
 			DBConnect.closeResource(ps);
 		}
@@ -111,7 +109,7 @@ public class BookDAOPostgres implements IBookDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when deleting book details" + e.getMessage());
+			throw new DatabaseException("Exceptions when deleting book details", e);
 		} finally {
 			DBConnect.closeResource(ps);
 		}
@@ -141,7 +139,7 @@ public class BookDAOPostgres implements IBookDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when show book by ID details" + e.getMessage());
+			throw new DatabaseException("Exceptions when show book by ID details", e);
 		} finally {
 			DBConnect.closeResource(ps);
 		}
@@ -168,7 +166,7 @@ public class BookDAOPostgres implements IBookDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when show book and book format data details" + e.getMessage());
+			throw new DatabaseException("Exceptions when show book and book format data details", e);
 		} finally {
 			DBConnect.closeResource(ps);
 		}
@@ -209,7 +207,7 @@ public class BookDAOPostgres implements IBookDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when show book information by Id details" + e.getMessage());
+			throw new DatabaseException("Exceptions when show book information by Id details", e);
 		} finally {
 			DBConnect.closeResource(ps, rs);
 		}
@@ -237,7 +235,7 @@ public class BookDAOPostgres implements IBookDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when updating book details" + e.getMessage());
+			throw new DatabaseException("Exceptions when updating book details", e);
 		} finally {
 			DBConnect.closeResource(ps);
 		}
@@ -278,7 +276,7 @@ public class BookDAOPostgres implements IBookDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when searching book by Book Name details" + e.getMessage());
+			throw new DatabaseException("Exceptions when searching book by Book Name details", e);
 		} finally {
 			DBConnect.closeResource(ps, rs);
 		}
@@ -318,7 +316,7 @@ public class BookDAOPostgres implements IBookDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when searching category by Id details" + e.getMessage());
+			throw new DatabaseException("Exceptions when searching category by Id details", e);
 		} finally {
 			DBConnect.closeResource(ps, rs);
 		}
@@ -341,7 +339,7 @@ public class BookDAOPostgres implements IBookDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when show category details" + e.getMessage());
+			throw new DatabaseException("Exceptions when show category details", e);
 		} finally {
 			DBConnect.closeResource(ps, rs);
 		}
@@ -368,7 +366,7 @@ public class BookDAOPostgres implements IBookDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when show master book details" + e.getMessage());
+			throw new DatabaseException("Exceptions when show master book details", e);
 		} finally {
 			DBConnect.closeResource(ps, rs);
 		}
@@ -395,8 +393,7 @@ public class BookDAOPostgres implements IBookDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException(
-					"Exceptions when show book format and master book by book Id details" + e.getMessage());
+			throw new DatabaseException("Exceptions when show book format and master book by book Id details", e);
 		} finally {
 			DBConnect.closeResource(ps, rs);
 		}
@@ -422,7 +419,7 @@ public class BookDAOPostgres implements IBookDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when show book format details" + e.getMessage());
+			throw new DatabaseException("Exceptions when show book format details", e);
 		} finally {
 			DBConnect.closeResource(ps, rs);
 		}
@@ -442,7 +439,7 @@ public class BookDAOPostgres implements IBookDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when entering book format details" + e.getMessage());
+			throw new DatabaseException("Exceptions when entering book format details", e);
 		} finally {
 			DBConnect.closeResource(ps);
 		}
@@ -461,7 +458,7 @@ public class BookDAOPostgres implements IBookDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when deleting book format details" + e.getMessage());
+			throw new DatabaseException("Exceptions when deleting book format details", e);
 		} finally {
 			DBConnect.closeResource(ps);
 		}
@@ -501,7 +498,7 @@ public class BookDAOPostgres implements IBookDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when show book and category by ID details" + e.getMessage());
+			throw new DatabaseException("Exceptions when show book and category by ID details", e);
 		} finally {
 			DBConnect.closeResource(ps, rs);
 		}

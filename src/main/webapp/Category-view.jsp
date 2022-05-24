@@ -4,7 +4,7 @@
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
 <%@page import="com.narola.bookstore.category.model.Categorry"%>
-
+<%@page import="com.narola.bookstore.utility.Constant"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,20 +42,6 @@ body {
 
 	</section>
 	<section id="interface1">
-		<div>
-			<%
-			if (request.getAttribute("ErrorMessage") == null) {
-			%>
-			<%
-			} else {
-			%>
-			<p>
-				<font color="red"><b><%=request.getAttribute("ErrorMessage")%></b></font>
-			</p>
-			<%
-			}
-			%>
-		</div>
 		<form action="Category-View.jsp">
 			<%
 			List<Categorry> clist = (ArrayList) request.getAttribute("listOfCategory");

@@ -24,9 +24,8 @@ public class BookDAOMysql implements IBookDAO {
 		try {
 			connection = DBConnect.getInstance().getConnection();
 			preparedStatement = connection.prepareStatement(
-					"SELECT b.*,c.categoryName FROM book b left join category c on b.categoryId=c.categoryId");
+					"SELECTt b.*,c.categoryName FROM book b left join category c on b.categoryId=c.categoryId");
 			resultSet = preparedStatement.executeQuery();
-
 			while (resultSet.next()) {
 				int bookId = resultSet.getInt("bookId");
 				String bookname = resultSet.getString("bookName");
@@ -47,7 +46,7 @@ public class BookDAOMysql implements IBookDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when display all book details" + e.getMessage());
+			throw new DatabaseException("Exceptions when display all book details", e);
 		} finally {
 			DBConnect.closeResource(preparedStatement, resultSet);
 		}
@@ -92,7 +91,7 @@ public class BookDAOMysql implements IBookDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when entering book and book_format details" + e.getMessage());
+			throw new DatabaseException("Exceptions when entering book and book_format details", e);
 		} finally {
 			DBConnect.closeResource(ps);
 		}
@@ -111,7 +110,7 @@ public class BookDAOMysql implements IBookDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when deleting book details" + e.getMessage());
+			throw new DatabaseException("Exceptions when deleting book details", e);
 		} finally {
 			DBConnect.closeResource(ps);
 		}
@@ -141,7 +140,7 @@ public class BookDAOMysql implements IBookDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when show book by ID details" + e.getMessage());
+			throw new DatabaseException("Exceptions when show book by ID details", e);
 		} finally {
 			DBConnect.closeResource(ps);
 		}
@@ -168,7 +167,7 @@ public class BookDAOMysql implements IBookDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when show book and book format data details" + e.getMessage());
+			throw new DatabaseException("Exceptions when show book and book format data details", e);
 		} finally {
 			DBConnect.closeResource(ps);
 		}
@@ -209,7 +208,7 @@ public class BookDAOMysql implements IBookDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when show book information by Id details" + e.getMessage());
+			throw new DatabaseException("Exceptions when show book information by Id details", e);
 		} finally {
 			DBConnect.closeResource(ps, rs);
 		}
@@ -237,7 +236,7 @@ public class BookDAOMysql implements IBookDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when updating book details" + e.getMessage());
+			throw new DatabaseException("Exceptions when updating book details", e);
 		} finally {
 			DBConnect.closeResource(ps);
 		}
@@ -278,7 +277,7 @@ public class BookDAOMysql implements IBookDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when searching book by Book Name details" + e.getMessage());
+			throw new DatabaseException("Exceptions when searching book by Book Name details", e);
 		} finally {
 			DBConnect.closeResource(ps, rs);
 		}
@@ -318,7 +317,7 @@ public class BookDAOMysql implements IBookDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when searching category by Id details" + e.getMessage());
+			throw new DatabaseException("Exceptions when searching category by Id details", e);
 		} finally {
 			DBConnect.closeResource(ps, rs);
 		}
@@ -341,7 +340,7 @@ public class BookDAOMysql implements IBookDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when show category details" + e.getMessage());
+			throw new DatabaseException("Exceptions when show category details", e);
 		} finally {
 			DBConnect.closeResource(ps, rs);
 		}
@@ -368,7 +367,7 @@ public class BookDAOMysql implements IBookDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when show master book details" + e.getMessage());
+			throw new DatabaseException("Exceptions when show master book details", e);
 		} finally {
 			DBConnect.closeResource(ps, rs);
 		}
@@ -395,8 +394,7 @@ public class BookDAOMysql implements IBookDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException(
-					"Exceptions when show book format and master book by book Id details" + e.getMessage());
+			throw new DatabaseException("Exceptions when show book format and master book by book Id details", e);
 		} finally {
 			DBConnect.closeResource(ps, rs);
 		}
@@ -422,7 +420,7 @@ public class BookDAOMysql implements IBookDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when show book format details" + e.getMessage());
+			throw new DatabaseException("Exceptions when show book format details", e);
 		} finally {
 			DBConnect.closeResource(ps, rs);
 		}
@@ -442,7 +440,7 @@ public class BookDAOMysql implements IBookDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when entering book format details" + e.getMessage());
+			throw new DatabaseException("Exceptions when entering book format details", e);
 		} finally {
 			DBConnect.closeResource(ps);
 		}
@@ -461,7 +459,7 @@ public class BookDAOMysql implements IBookDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when deleting book format details" + e.getMessage());
+			throw new DatabaseException("Exceptions when deleting book format details", e);
 		} finally {
 			DBConnect.closeResource(ps);
 		}
@@ -501,7 +499,7 @@ public class BookDAOMysql implements IBookDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when show book and category by ID details" + e.getMessage());
+			throw new DatabaseException("Exceptions when show book and category by ID details", e);
 		} finally {
 			DBConnect.closeResource(ps, rs);
 		}

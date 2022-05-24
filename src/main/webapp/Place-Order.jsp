@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@page import="com.narola.bookstore.user.User"%>
 <%@page import="jakarta.servlet.http.HttpSession"%>
-
+<%@page import="com.narola.bookstore.utility.Constant"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,83 +70,88 @@ body {
 	<section id="header">
 		<jsp:include page="HeaderOfUser.jsp" />
 	</section>
-	<form action="<%=request.getContextPath()%>/OrderAdd"
-		method="post">
-	<section id="interface1">
-		<%
-		HttpSession session1 = request.getSession(true);
-		User user = (User) session1.getAttribute("user");
-		%>
-		<div id="table1">
-			<table style="width: 40%; height: 50%;" border="1">
-				<tr align="center">
-					<td colspan="2"><div class="title">Enter Your Address</div></td>
-				</tr>
-				<tr>
-					<td>Company Name</td>
-					<td><input type="text" name="addressLine1" size="25" /></td>
-				</tr>
-				<tr>
-					<td>Steel Address</td>
-					<td><textarea name="addressLine2" rows="3"
-							style="width: 200px; height: 110px;"></textarea></td>
 
-				</tr>
-				<tr>
-					<td>LandMark</td>
-					<td><input type="text" name="landmark" size="25" /></td>
-				</tr>
-				<tr>
-					<td>State</td>
-					<td><input type="text" name="state" size="25" /></td>
-				</tr>
-				<tr>
-					<td>PIN Code</td>
-					<td><input type="text" name="pincode" size="25" /></td>
-				</tr>
-				<tr>
-					<td>City</td>
-					<td><input type="text" name="city" size="25" /></td>
-				</tr>
-				<tr>
-					<td>Address Type</td>
-					<td><input type="text" name="addresstype" size="25" /></td>
-				</tr>
-				<tr>
-					<td>Mobile No</td>
-					<td><input type="text" name="mobileNo" size="25" /></td>
-				</tr>
-				<tr>
-					<td colspan="2" align="center"><input type="submit"
-						name="Save&Continue"
-						style="font-weight: bold; color: black; background-color: red;"
-						value="Save & Continue" /></td>
-				</tr>
-			</table>
-		</div>
-	</section>
-	<section id="interface2">
-		<hr>
-		<div id="order">
-			<div class="orderSummary" align="right">
-				<table style="width: 30%; height: 30%;">
-					<tr>
-						<td colspan="2"><b>Order Summary</b></td>
+
+	<form action="<%=request.getContextPath()%>/OrderAdd" method="post">
+		<section id="interface1">
+			<%
+			HttpSession session1 = request.getSession(true);
+			User user = (User) session1.getAttribute("user");
+			%>
+			<div id="table1">
+				<table style="width: 40%; height: 50%;" border="1">
+					<tr align="center">
+						<td colspan="2"><div class="title">Enter Your Address</div></td>
 					</tr>
 					<tr>
-						<td>Items</td>
-						<td><input type="hidden" name="items" value="<%=request.getAttribute("Items")%>"/> <%=request.getAttribute("Items")%></td>
+						<td>Company Name</td>
+						<td><input type="text" name="addressLine1" size="25" /></td>
 					</tr>
 					<tr>
-						<td><b>TotalAmount</b></td>
-						<td><input type="hidden" name="totalAmount" value="<%=request.getAttribute("TotalAmount")%>"/><b><font color="red">&#8377;<%=request.getAttribute("TotalAmount")%></font></b></td>
+						<td>Steel Address</td>
+						<td><textarea name="addressLine2" rows="3"
+								style="width: 200px; height: 110px;"></textarea></td>
+
+					</tr>
+					<tr>
+						<td>LandMark</td>
+						<td><input type="text" name="landmark" size="25" /></td>
+					</tr>
+					<tr>
+						<td>State</td>
+						<td><input type="text" name="state" size="25" /></td>
+					</tr>
+					<tr>
+						<td>PIN Code</td>
+						<td><input type="text" name="pincode" size="25" /></td>
+					</tr>
+					<tr>
+						<td>City</td>
+						<td><input type="text" name="city" size="25" /></td>
+					</tr>
+					<tr>
+						<td>Address Type</td>
+						<td><input type="text" name="addresstype" size="25" /></td>
+					</tr>
+					<tr>
+						<td>Mobile No</td>
+						<td><input type="text" name="mobileNo" size="25" /></td>
+					</tr>
+					<tr>
+						<td colspan="2" align="center"><input type="submit"
+							name="Save&Continue"
+							style="font-weight: bold; color: black; background-color: red;"
+							value="Save & Continue" /></td>
 					</tr>
 				</table>
 			</div>
-		</div>
-		<hr>
-	</section>
+		</section>
+		<section id="interface2">
+			<hr>
+			<div id="order">
+				<div class="orderSummary" align="right">
+					<table style="width: 30%; height: 30%;">
+						<tr>
+							<td colspan="2"><b>Order Summary</b></td>
+						</tr>
+						<tr>
+							<td>Items</td>
+							<td><input type="hidden" name="items"
+								value="<%=request.getAttribute("Items")%>" /> <%=request.getAttribute("Items")%></td>
+						</tr>
+						<tr>
+							<td><b>TotalAmount</b></td>
+							<td><input type="hidden" name="totalAmount"
+								value="<%=request.getAttribute("TotalAmount")%>" /><b><font
+									color="red">&#8377;<%=request.getAttribute("TotalAmount")%></font></b></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<hr>
+		</section>
 	</form>
+
 	<section id="footer">
 		<jsp:include page="Footer.jsp" />
 	</section>

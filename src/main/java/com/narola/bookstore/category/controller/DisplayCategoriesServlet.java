@@ -2,6 +2,7 @@ package com.narola.bookstore.category.controller;
 
 import java.io.IOException;
 import com.narola.bookstore.category.service.ICategoryService;
+import com.narola.bookstore.utility.Constant;
 import com.narola.bookstore.utility.ServiceFactory;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -21,8 +22,8 @@ public class DisplayCategoriesServlet extends HttpServlet {
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Category-list.jsp");
 			requestDispatcher.forward(request, response);
 		} catch (Exception e) {
-			e.printStackTrace();
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Category-list.jsp");
+			request.setAttribute(Constant.ERROR, e.getMessage());
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Errorpage.jsp");
 			requestDispatcher.forward(request, response);
 		}
 		

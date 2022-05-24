@@ -56,7 +56,7 @@ public class DBConnect {
 		return DBConnect;
 	}
 
-	public void initializedConnection() throws DatabaseException{
+	public void initializedConnection() throws DatabaseException {
 		getConnection();
 	}
 
@@ -67,9 +67,9 @@ public class DBConnect {
 				con = DriverManager.getConnection(getDburl() + "/" + getDbname(), getUsername(), getPassword());
 			}
 		} catch (SQLException s) {
-			s.printStackTrace();
+			throw new DatabaseException("Database Exception", s);
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new DatabaseException("Database Exception", e);
 		}
 		return con;
 	}

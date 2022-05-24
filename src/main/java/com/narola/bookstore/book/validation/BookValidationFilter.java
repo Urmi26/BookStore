@@ -23,7 +23,6 @@ public class BookValidationFilter implements Filter {
 			throws IOException, ServletException {
 		IBookService iBookService = ServiceFactory.getInstence().iBookService;
 		RequestDispatcher rd = null;
-		System.out.println("InFilter");
 		String bookName = request.getParameter("bookName");
 		String authorName = request.getParameter("authorName");
 		String description = request.getParameter("description");
@@ -34,10 +33,6 @@ public class BookValidationFilter implements Filter {
 
 		HttpServletRequest req = (HttpServletRequest) request;
 		String url = req.getRequestURI();
-		System.out.println(url);
-		System.out.println(url.equals(req.getContextPath() + Constant.BOOK_UPDATE_URL));
-		System.out.println(req.getContextPath() + Constant.BOOK_UPDATE_URL);
-
 		boolean isErrorExist = false;
 
 		if (bookName == null || bookName.trim().isEmpty()) {
@@ -108,7 +103,7 @@ public class BookValidationFilter implements Filter {
 
 				HttpServletRequest requ = (HttpServletRequest) request;
 				String path = requ.getServletContext().getRealPath("/").concat("Book-Image");
-				path = path + "\\" + bookId;
+				path = path + Constant.BACKSLASH_URL_USED + bookId;
 
 				File file = new File(path);
 				String[] imgNames = file.list();
@@ -118,7 +113,6 @@ public class BookValidationFilter implements Filter {
 					imgPaths.add(imgName);
 				}
 				book.setImagesPathList(imgPaths);
-
 				request.setAttribute("Book", book);
 				request.setAttribute("listOfCategory", iBookService.getAllCategory());
 				request.setAttribute("listOfMsBookFormat", iBookService.getAllMasterBookFormat());

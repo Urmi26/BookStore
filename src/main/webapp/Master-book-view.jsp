@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="java.util.*"%>
+<%@page import="com.narola.bookstore.utility.Constant"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,7 +41,8 @@ body {
 	<section id="interface1">
 		<form action="Master-book-view.jsp">
 			<%
-			List<com.narola.bookstore.msbookformat.model.MasterBookFormat> mslist = (ArrayList) request.getAttribute("listOfMasterBook");
+			List<com.narola.bookstore.msbookformat.model.MasterBookFormat> mslist = (ArrayList) request
+					.getAttribute("listOfMasterBook");
 			%>
 			<table border=1>
 				<caption>

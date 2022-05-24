@@ -6,6 +6,7 @@
 <%@page import="java.io.File"%>
 <%@page import="java.io.*"%>
 <%@page import="com.narola.bookstore.book.model.Book"%>
+<%@page import="com.narola.bookstore.utility.Constant"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,33 +82,32 @@ body {
 				imgPaths.add(str + imgName);
 			}
 			%>
-				<div class="items">
-					<div class="col">
-						<div class="books">
-							<span><%=i%></span><br>
-							<div class="bookImage">
+			<div class="items">
+				<div class="col">
+					<div class="books">
+						<span><%=i%></span><br>
+						<div class="bookImage">
 
-								<a
-									href="<%=request.getContextPath()%>/BookDetails?bookId=<%=book.getBookId()%>">
-									<img src="<%=imgPaths.get(0)%>" alt="<%=book.getBookName()%>"
-									width=250 height=300 />
-								</a>
-							</div>
-							<div class="bookDetails">
-								<p class="card-text text-center">
-									<span><%=book.getBookName()%></span> <br> <span><%=book.getAuthorName()%></span>
-									<br> <br> <span>&#8377;<%=book.getAmount()%></span>
-								</p>
-							</div>
+							<a
+								href="<%=request.getContextPath()%>/BookDetails?bookId=<%=book.getBookId()%>">
+								<img src="<%=imgPaths.get(0)%>" alt="<%=book.getBookName()%>"
+								width=250 height=300 />
+							</a>
+						</div>
+						<div class="bookDetails">
+							<p class="card-text text-center">
+								<span><%=book.getBookName()%></span> <br> <span><%=book.getAuthorName()%></span>
+								<br> <br> <span>&#8377;<%=book.getAmount()%></span>
+							</p>
 						</div>
 					</div>
-					<%
-					i++;
-					}
-					%>
 				</div>
+				<%
+				i++;
+				}
+				%>
 			</div>
-
+		</div>
 
 	</section>
 	<section id="footer">

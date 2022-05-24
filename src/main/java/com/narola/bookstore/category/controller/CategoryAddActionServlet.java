@@ -2,6 +2,7 @@ package com.narola.bookstore.category.controller;
 
 import java.io.IOException;
 import com.narola.bookstore.category.service.ICategoryService;
+import com.narola.bookstore.utility.Constant;
 import com.narola.bookstore.utility.ServiceFactory;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -21,10 +22,11 @@ public class CategoryAddActionServlet extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 			ICategoryService iCategoryService = ServiceFactory.getInstence().getCategoryService();
-			iCategoryService.addCategory(request.getParameter("categoryName"), request, response);
+			iCategoryService.addCategory(request.getParameter("categoryName"), request);
+			response.sendRedirect(request.getContextPath() + Constant.CATEGORY_DISPLAY_URL);
 		} catch (Exception e) {
-			request.setAttribute("ErrorMessage", e.getMessage());
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Category-form.jsp");
+			request.setAttribute(Constant.ERROR, e.getMessage());
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Errorpage.jsp");
 			requestDispatcher.forward(request, response);
 		}
 	}

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@page import="com.narola.bookstore.utility.Constant"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,20 +38,6 @@ body {
 
 	</section>
 	<section id="interface1">
-		<div>
-			<%
-			if (request.getAttribute("ErrorMessage") == null) {
-			%>
-			<%
-			} else {
-			%>
-			<p>
-				<font color="red"><b><%=request.getAttribute("ErrorMessage")%></b></font>
-			</p>
-			<%
-			}
-			%>
-		</div>
 		<form action="<%=request.getContextPath()%>/SearchMSBook" method="get">
 			<table border=1>
 				<caption>

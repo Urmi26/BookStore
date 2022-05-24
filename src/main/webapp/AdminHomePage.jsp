@@ -1,3 +1,4 @@
+<%@page import="com.narola.bookstore.utility.Constant"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -35,8 +36,8 @@ body {
 	<section id="header1">
 		<jsp:include page="Header.jsp" />
 	</section>
-	<section id=interface2">
-		<jsp:include page="Dashboard.jsp" />
+	<section id="interface2">
+			<jsp:include page="Dashboard.jsp" />
 	</section>
 	<section id="footer1">
 		<jsp:include page="Footer.jsp" />

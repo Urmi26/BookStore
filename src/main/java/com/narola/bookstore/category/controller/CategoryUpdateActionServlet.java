@@ -3,6 +3,7 @@ package com.narola.bookstore.category.controller;
 import java.io.IOException;
 import com.narola.bookstore.category.model.Categorry;
 import com.narola.bookstore.category.service.ICategoryService;
+import com.narola.bookstore.utility.Constant;
 import com.narola.bookstore.utility.ServiceFactory;
 
 import jakarta.servlet.RequestDispatcher;
@@ -27,12 +28,12 @@ public class CategoryUpdateActionServlet extends HttpServlet {
 			int categoryID = Integer.parseInt(categoryId);
 			String categoryName = request.getParameter("categoryName");
 			Categorry category = new Categorry(categoryID, categoryName);
+			iCategoryService.updateCategoryData(category, request);
+			response.sendRedirect(request.getContextPath() + Constant.CATEGORY_DISPLAY_URL);
 			
-			iCategoryService.updateCategoryData(category, request, response);
-
 		} catch (Exception e) {
-			request.setAttribute("ErrorMessage", e.getMessage());
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Category-update.jsp");
+			request.setAttribute(Constant.ERROR, e.getMessage());
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Errorpage.jsp");
 			requestDispatcher.forward(request, response);
 		}
 	}

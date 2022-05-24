@@ -16,37 +16,29 @@ import com.narola.bookstore.utility.Constant;
 import com.narola.bookstore.utility.DAOFactory;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 
 public class BookServiceImpl implements IBookService {
 
-	public void addBook(Book book, HttpServletRequest request, HttpServletResponse response) {
+	public void addBook(Book book, HttpServletRequest request) {
 		try {
 			String url = request.getServletContext().getRealPath("/").concat("Book-Image");
 			File parentImgFolder = new File(url);
 			IBookDAO bookDAO = DAOFactory.getInstence().getBookDAO();
 			int bookID = bookDAO.insertQry(book);
 
-			if (bookID != 0) {
-				if (!parentImgFolder.exists()) {
-					parentImgFolder.mkdir();
-				}
-				url = url + "\\" + String.valueOf(bookID);
-				File bookImgFolder = new File(url);
-				if (!bookImgFolder.exists()) {
-					bookImgFolder.mkdir();
-				}
-				for (Part part : request.getParts()) {
-					if (part.getName().equals("bookImage")) {
-						part.write(url + "\\" + part.getSubmittedFileName());
-					}
-				}
+			if (!parentImgFolder.exists()) {
+				parentImgFolder.mkdir();
 			}
-			if (bookID > 0) {
-				response.sendRedirect(request.getContextPath() + Constant.BOOK_DISPLAY_URL);
-			} else {
-				throw new ApplicationException("Sorry, Data is not submitted");
+			url = url + Constant.BACKSLASH_URL_USED + String.valueOf(bookID);
+			File bookImgFolder = new File(url);
+			if (!bookImgFolder.exists()) {
+				bookImgFolder.mkdir();
+			}
+			for (Part part : request.getParts()) {
+				if (part.getName().equals("bookImage")) {
+					part.write(url + Constant.BACKSLASH_URL_USED + part.getSubmittedFileName());
+				}
 			}
 		} catch (DatabaseException | ServletException | IOException e) {
 			throw new ApplicationException("Oops, Something went wrong..", e);
@@ -84,20 +76,11 @@ public class BookServiceImpl implements IBookService {
 	}
 
 	@Override
-	public void deletebook(int bookId, HttpServletRequest request, HttpServletResponse response) {
+	public void deletebook(int bookId, HttpServletRequest request) {
 		try {
 			IBookDAO bookDAO = DAOFactory.getInstence().getBookDAO();
-
 			bookDAO.deleteQry(bookId);
-
-			if (bookId != 0) {
-				response.sendRedirect(request.getContextPath() + Constant.BOOK_DISPLAY_URL);
-			} else {
-				throw new ApplicationException("Delete can't Records");
-			}
-
-		} catch (DatabaseException | IOException e) {
-
+		} catch (DatabaseException e) {
 			throw new ApplicationException("Oops, Something went wrong..", e);
 		}
 	}
@@ -123,7 +106,7 @@ public class BookServiceImpl implements IBookService {
 			if (!parentImgFolder.exists()) {
 				parentImgFolder.mkdir();
 			}
-			path = path + "\\" + bookId;
+			path = path + Constant.BACKSLASH_URL_USED + bookId;
 			File bookImgFolder = new File(path);
 			if (!bookImgFolder.exists()) {
 				bookImgFolder.mkdir();
@@ -156,16 +139,13 @@ public class BookServiceImpl implements IBookService {
 	}
 
 	@Override
-	public void updateBook(Book book, List<Integer> msBookId, String[] msBookIdChecked, HttpServletRequest request,
-			HttpServletResponse response) {
+	public void updateBook(Book book, List<Integer> msBookId, String[] msBookIdChecked, HttpServletRequest request) {
 		try {
 			IBookDAO bookDAO = DAOFactory.getInstence().getBookDAO();
 
 			for (String s : msBookIdChecked) {
 
-				if (msBookId.contains(Integer.parseInt(s))) {
-					System.out.println("match : " + s);
-				} else {
+				if (!msBookId.contains(Integer.parseInt(s))) {
 					Book bk = new Book();
 					bk.setBookId(book.getBookId());
 					MasterBookFormat masterBookFormat = new MasterBookFormat();
@@ -186,7 +166,7 @@ public class BookServiceImpl implements IBookService {
 				parentImgFolder.mkdir();
 			}
 
-			path = path + "\\" + book.getBookId();
+			path = path + Constant.BACKSLASH_URL_USED + book.getBookId();
 			File bookImgFolder = new File(path);
 			if (!bookImgFolder.exists()) {
 				bookImgFolder.mkdir();
@@ -195,19 +175,11 @@ public class BookServiceImpl implements IBookService {
 			for (Part part : request.getParts()) {
 				if (part.getName().equals("bookImage")) {
 					if (!part.getSubmittedFileName().isEmpty()) {
-						part.write(path + "\\" + part.getSubmittedFileName());
+						part.write(path + Constant.BACKSLASH_URL_USED + part.getSubmittedFileName());
 					}
 				}
 			}
-
-			int status = bookDAO.updateQry(book);
-
-			if (status > 0) {
-				response.sendRedirect(request.getContextPath() + Constant.BOOK_DISPLAY_URL);
-			} else {
-				throw new ApplicationException("record cann't updated..");
-			}
-
+			bookDAO.updateQry(book);
 		} catch (DatabaseException | ServletException | IOException e) {
 			throw new ApplicationException("Oops, Something went wrong..", e);
 		}
@@ -218,7 +190,7 @@ public class BookServiceImpl implements IBookService {
 		try {
 			IBookDAO bookDAO = DAOFactory.getInstence().getBookDAO();
 			String path = request.getServletContext().getRealPath("/").concat("Book-Image");
-			path = path + "\\" + bookId;
+			path = path + Constant.BACKSLASH_URL_USED + bookId;
 			File file = new File(path);
 			String[] imgNames = file.list();
 			List<String> imgPaths = new ArrayList<>();
@@ -278,22 +250,22 @@ public class BookServiceImpl implements IBookService {
 	}
 
 	@Override
-	public void deleteImage(HttpServletRequest request, HttpServletResponse response) {
+	public void deleteImage(HttpServletRequest request) {
 		try {
 			String image = request.getParameter("imageName");
 			image = image.substring(31);
 
 			String path = request.getServletContext().getRealPath("/").concat("Book-Image");
-			path = path + "\\" + request.getParameter("bookId") + "\\" + image;
+			path = path + Constant.BACKSLASH_URL_USED + request.getParameter("bookId") + Constant.BACKSLASH_URL_USED
+					+ image;
 			File bookImgFolder = new File(path);
-
 			if (!bookImgFolder.exists()) {
 				throw new ApplicationException("Folder is not available");
 			}
 			bookImgFolder = new File(path);
 			bookImgFolder.delete();
-			response.sendRedirect(request.getContextPath() + Constant.BOOK_DISPLAY_URL);
-		} catch (DatabaseException | IOException e) {
+
+		} catch (DatabaseException e) {
 			throw new ApplicationException("Oops, Something went wrong..", e);
 		}
 	}

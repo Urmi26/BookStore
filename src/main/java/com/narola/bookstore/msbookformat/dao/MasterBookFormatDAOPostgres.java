@@ -34,7 +34,7 @@ public class MasterBookFormatDAOPostgres implements IMasterBookFormatDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when Display Master Book details" + e.getMessage());
+			throw new DatabaseException("Exceptions when Display Master Book details", e);
 		} finally {
 			DBConnect.closeResource(ps, rs);
 		}
@@ -53,7 +53,7 @@ public class MasterBookFormatDAOPostgres implements IMasterBookFormatDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when entering Master Book details" + e.getMessage());
+			throw new DatabaseException("Exceptions when entering Master Book details", e);
 		} finally {
 			DBConnect.closeResource(ps);
 		}
@@ -73,7 +73,7 @@ public class MasterBookFormatDAOPostgres implements IMasterBookFormatDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when deleting  Master Book details" + e.getMessage());
+			throw new DatabaseException("Exceptions when deleting  Master Book details", e);
 		} finally {
 			DBConnect.closeResource(ps);
 		}
@@ -93,7 +93,7 @@ public class MasterBookFormatDAOPostgres implements IMasterBookFormatDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when updating Master Book details" + e.getMessage());
+			throw new DatabaseException("Exceptions when updating Master Book details", e);
 		} finally {
 			DBConnect.closeResource(ps);
 		}
@@ -117,7 +117,7 @@ public class MasterBookFormatDAOPostgres implements IMasterBookFormatDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when show the Master Book by Id details" + e.getMessage());
+			throw new DatabaseException("Exceptions when show the Master Book by Id details", e);
 		} finally {
 			DBConnect.closeResource(ps);
 		}
@@ -145,7 +145,7 @@ public class MasterBookFormatDAOPostgres implements IMasterBookFormatDAO {
 		} catch (DatabaseException e) {
 			throw e;
 		} catch (SQLException e) {
-			throw new DatabaseException("Exceptions when show the  Master Book by Name details" + e.getMessage());
+			throw new DatabaseException("Exceptions when show the  Master Book by Name details", e);
 		} finally {
 			DBConnect.closeResource(ps, rs);
 		}
